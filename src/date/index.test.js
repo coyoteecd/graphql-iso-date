@@ -19,8 +19,8 @@ const invalidDates = [
 ]
 
 const validDates = [
-  [ '2016-12-17', new Date(Date.UTC(2016, 11, 17)) ],
-  [ '2016-02-01', new Date(Date.UTC(2016, 1, 1)) ]
+  ['2016-12-17', new Date(Date.UTC(2016, 11, 17))],
+  ['2016-02-01', new Date(Date.UTC(2016, 1, 1))]
 ]
 
 describe('GraphQLDate', () => {
@@ -44,10 +44,10 @@ describe('GraphQLDate', () => {
     });
 
     [
-      [ new Date(Date.UTC(2016, 11, 17, 14)), '2016-12-17' ],
-      [ new Date(Date.UTC(2016, 0, 1, 14, 48, 10, 3)), '2016-01-01' ],
-      [ new Date(Date.UTC(2016, 0, 1)), '2016-01-01' ]
-    ].forEach(([ value, expected ]) => {
+      [new Date(Date.UTC(2016, 11, 17, 14)), '2016-12-17'],
+      [new Date(Date.UTC(2016, 0, 1, 14, 48, 10, 3)), '2016-01-01'],
+      [new Date(Date.UTC(2016, 0, 1)), '2016-01-01']
+    ].forEach(([value, expected]) => {
       it(`serializes javascript Date ${stringify(value)} into ${stringify(expected)}`, () => {
         expect(
           GraphQLDate.serialize(value)
@@ -55,7 +55,7 @@ describe('GraphQLDate', () => {
       })
     })
 
-    it(`throws error when serializing invalid javascript Date`, () => {
+    it('throws error when serializing invalid javascript Date', () => {
       expect(() =>
         GraphQLDate.serialize(new Date('invalid date'))
       ).toThrowErrorMatchingSnapshot()
@@ -80,7 +80,7 @@ describe('GraphQLDate', () => {
   })
 
   describe('value parsing', () => {
-    validDates.forEach(([ value, expected ]) => {
+    validDates.forEach(([value, expected]) => {
       it(`parses date-string ${stringify(value)} into javascript Date ${stringify(expected)}`, () => {
         expect(
           GraphQLDate.parseValue(value)
@@ -112,7 +112,7 @@ describe('GraphQLDate', () => {
   })
 
   describe('literial parsing', () => {
-    validDates.forEach(([ value, expected ]) => {
+    validDates.forEach(([value, expected]) => {
       const literal = {
         kind: Kind.STRING, value
       }
