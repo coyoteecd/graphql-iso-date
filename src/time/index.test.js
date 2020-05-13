@@ -27,14 +27,14 @@ const invalidDates = [
 ]
 
 const validDates = [
-  [ '00:00:00Z', new Date(Date.UTC(2017, 0, 1)) ],
-  [ '00:00:59Z', new Date(Date.UTC(2017, 0, 1, 0, 0, 59)) ],
-  [ '10:30:02.1Z', new Date(Date.UTC(2017, 0, 1, 10, 30, 2, 100)) ],
-  [ '09:09:06.13Z', new Date(Date.UTC(2017, 0, 1, 9, 9, 6, 130)) ],
-  [ '10:00:11.003Z', new Date(Date.UTC(2017, 0, 1, 10, 0, 11, 3)) ],
-  [ '16:10:20.1359945Z', new Date(Date.UTC(2017, 0, 1, 16, 10, 20, 135)) ],
-  [ '00:00:00+01:30', new Date(Date.UTC(2016, 11, 31, 22, 30)) ],
-  [ '00:00:30.3-01:30', new Date(Date.UTC(2017, 0, 1, 1, 30, 30, 300)) ]
+  ['00:00:00Z', new Date(Date.UTC(2017, 0, 1))],
+  ['00:00:59Z', new Date(Date.UTC(2017, 0, 1, 0, 0, 59))],
+  ['10:30:02.1Z', new Date(Date.UTC(2017, 0, 1, 10, 30, 2, 100))],
+  ['09:09:06.13Z', new Date(Date.UTC(2017, 0, 1, 9, 9, 6, 130))],
+  ['10:00:11.003Z', new Date(Date.UTC(2017, 0, 1, 10, 0, 11, 3))],
+  ['16:10:20.1359945Z', new Date(Date.UTC(2017, 0, 1, 16, 10, 20, 135))],
+  ['00:00:00+01:30', new Date(Date.UTC(2016, 11, 31, 22, 30))],
+  ['00:00:30.3-01:30', new Date(Date.UTC(2017, 0, 1, 1, 30, 30, 300))]
 ]
 
 describe('GraphQLTime', () => {
@@ -59,9 +59,9 @@ describe('GraphQLTime', () => {
 
     // Serialize from Date
     [
-      [ new Date(Date.UTC(2016, 0, 1)), '00:00:00.000Z' ],
-      [ new Date(Date.UTC(2016, 0, 1, 14, 48, 10, 3)), '14:48:10.003Z' ]
-    ].forEach(([ value, expected ]) => {
+      [new Date(Date.UTC(2016, 0, 1)), '00:00:00.000Z'],
+      [new Date(Date.UTC(2016, 0, 1, 14, 48, 10, 3)), '14:48:10.003Z']
+    ].forEach(([value, expected]) => {
       it(`serializes javascript Date ${stringify(value)} into ${stringify(expected)}`, () => {
         expect(
           GraphQLTime.serialize(value)
@@ -69,18 +69,18 @@ describe('GraphQLTime', () => {
       })
     })
 
-    it(`throws error when serializing invalid date`, () => {
+    it('throws error when serializing invalid date', () => {
       expect(() =>
         GraphQLTime.serialize(new Date('invalid date'))
       ).toThrowErrorMatchingSnapshot()
     });
 
     [
-      [ '00:00:00Z', '00:00:00Z' ],
-      [ '10:30:02.1Z', '10:30:02.1Z' ],
-      [ '16:10:20.1359945Z', '16:10:20.1359945Z' ],
-      [ '00:00:00+01:30', '22:30:00Z' ],
-      [ '00:00:30.3-01:30', '01:30:30.3Z' ]
+      ['00:00:00Z', '00:00:00Z'],
+      ['10:30:02.1Z', '10:30:02.1Z'],
+      ['16:10:20.1359945Z', '16:10:20.1359945Z'],
+      ['00:00:00+01:30', '22:30:00Z'],
+      ['00:00:30.3-01:30', '01:30:30.3Z']
     ].forEach(([input, output]) => {
       it(`serializes time-string ${input} into UTC time-string ${output}`, () => {
         expect(
@@ -99,7 +99,7 @@ describe('GraphQLTime', () => {
   })
 
   describe('value parsing', () => {
-    validDates.forEach(([ value, expected ]) => {
+    validDates.forEach(([value, expected]) => {
       it(`parses date-string ${stringify(value)} into javascript Date ${stringify(expected)}`, () => {
         expect(
           GraphQLTime.parseValue(value)
@@ -131,7 +131,7 @@ describe('GraphQLTime', () => {
   })
 
   describe('literial parsing', () => {
-    validDates.forEach(([ value, expected ]) => {
+    validDates.forEach(([value, expected]) => {
       const literal = {
         kind: Kind.STRING, value
       }
