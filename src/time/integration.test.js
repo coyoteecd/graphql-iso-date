@@ -8,6 +8,8 @@
  *
  */
 
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
 import { graphql, GraphQLObjectType, GraphQLSchema, GraphQLError } from 'graphql'
 import GraphQLTime from './'
 // flowlint-next-line untyped-import:off
