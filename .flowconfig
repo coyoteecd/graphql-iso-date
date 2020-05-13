@@ -6,6 +6,7 @@
 
 [options]
 include_warnings=true
+esproposal.optional_chaining=enable
 
 [lints]
 all=warn
